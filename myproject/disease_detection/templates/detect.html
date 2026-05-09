@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 style="color:#1b5e20;">Capture or Upload Leaf Image</h2>
+
+<div class="card">
+
+<!-- VIDEO (LIVE CAMERA) -->
+<video id="video" width="100%" autoplay style="border-radius:10px;"></video>
+
+<!-- IMAGE PREVIEW (HIDDEN INITIALLY) -->
+<img id="preview" style="width:100%; display:none; border-radius:10px;" />
+
+<canvas id="canvas" style="display:none;"></canvas>
+
+<!-- BUTTONS -->
+<button type="button" onclick="captureImage()">📸 Capture</button>
+<button type="button" onclick="retakeImage()" style="margin-top:10px; display:none;" id="retakeBtn">🔄 Retake</button>
+
+<hr>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <input type="file" name="image" accept="image/*">
+
+    <!-- Hidden input -->
+    <input type="hidden" name="captured_image" id="captured_image">
+
+    <button type="submit">Analyze</button>
+</form>
+
+{% if result %}
+    <h3 style="color:#2e7d32;">Result: {{ result }}</h3>
+{% endif %}
+
+</div>
+
+<script>
+let video = document.getElementById("video");
+let preview = document.getElementById("preview");
+let canvas = document.getElementById("canvas");
+let retakeBtn = document.getElementById("retakeBtn");
+
+// START CAMERA
+navigator.mediaDevices.getUserMedia({ video: true })
+.then(stream => {
+    video.srcObject = stream;
+})
+.catch(err => {
+    console.log("Camera not accessible");
+});
+
+// CAPTURE IMAGE
+function captureImage() {
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+
+    let ctx = canvas.getContext("2d");
+    ctx.drawImage(video, 0, 0);
+
+    let imageData = canvas.toDataURL("image/png");
+
+    // SET HIDDEN INPUT
+    document.getElementById("captured_image").value = imageData;
+
+    // SHOW PREVIEW
+    preview.src = imageData;
+    preview.style.display = "block";
+
+    // HIDE VIDEO (FREEZE EFFECT)
+    video.style.display = "none";
+
+    // SHOW RETAKE BUTTON
+    retakeBtn.style.display = "block";
+}
+
+// RETAKE IMAGE
+function retakeImage() {
+    preview.style.display = "none";
+    video.style.display = "block";
+    retakeBtn.style.display = "none";
+
+    document.getElementById("captured_image").value = "";
+}
+</script>
+
+{% endblock %}

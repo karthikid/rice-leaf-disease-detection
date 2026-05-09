@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}Signup{% endblock %}
+
+{% block content %}
+
+<div class="card">
+    <h2>Create Account</h2>
+
+
+{% if error %}
+    <p class="error">{{ error }}</p>
+{% endif %}
+
+<form method="POST" onsubmit="return validateSignup()">
+    {% csrf_token %}
+    <input type="text" id="username" name="username" placeholder="Username" required>
+    <input type="password" id="password" name="password" placeholder="Password" required>
+    <input type="password" id="confirm" placeholder="Confirm Password" required>
+
+    <button type="submit">Sign Up</button>
+</form>
+
+<a href="/" class="link">Already have an account? Login</a>
+
+
+</div>
+
+<script>
+function validateSignup() {
+    let user = document.getElementById("username").value;
+    let pass = document.getElementById("password").value;
+    let confirm = document.getElementById("confirm").value;
+
+    if (user.length < 3) {
+        alert("Username must be at least 3 characters");
+        return false;
+    }
+
+    if (pass.length < 5) {
+        alert("Password must be at least 5 characters");
+        return false;
+    }
+
+    if (pass !== confirm) {
+        alert("Passwords do not match");
+        return false;
+    }
+
+    return true;
+}
+</script>
+
+{% endblock %}

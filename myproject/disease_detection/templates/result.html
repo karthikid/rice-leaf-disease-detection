@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 style="color:#1b5e20;">🌿 Detection Result</h2>
+
+<div class="card">
+
+{% if result %}
+
+    <h3 style="color:#2e7d32;">{{ result }}</h3>
+
+    <p><strong>Confidence:</strong> {{ confidence }}%</p>
+
+    <div style="margin-top:15px; padding:15px; background:#fff3cd; border-radius:8px;">
+        <p style="margin:0;">
+            <strong>Precautions / Treatment:</strong><br>
+            {{ prevention }}
+        </p>
+    </div>
+
+{% else %}
+    <p>No result available.</p>
+{% endif %}
+
+<a href="/detect/">
+    <button style="margin-top:20px;">Analyze Another</button>
+</a>
+
+
+</div>
+
+{% endblock %}

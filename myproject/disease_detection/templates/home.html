@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<div style="max-width:800px; margin:auto;">
+
+<h1 style="color:#1b5e20; font-size:36px;">
+    Rice Leaf Disease Detection Using Transformer Model
+</h1>
+
+<p style="font-size:16px; color:#444; margin-top:20px; line-height:1.6;">
+    Our intelligent system helps farmers, researchers, and agricultural professionals 
+    identify plant diseases instantly using advanced machine learning models.
+    Simply upload or capture an image of a leaf, and our system will analyze it 
+    to detect possible diseases with high accuracy.
+</p>
+
+<p style="font-size:16px; color:#444; margin-top:10px;">
+    Early detection can prevent crop damage and improve yield. 
+    Make smarter decisions with AI-powered insights.
+</p>
+
+<div style="margin-top:40px;">
+    <a href="/detect/">
+        <button class="primary">Start Detection</button>
+    </a>
+</div>
+
+
+</div>
+
+<!-- FEATURES -->
+
+<div style="margin-top:60px; display:flex; justify-content:center; flex-wrap:wrap;">
+
+<div style="background:white; padding:20px; margin:10px; border-radius:10px; width:250px; box-shadow:0 8px 20px rgba(0,0,0,0.1);">
+    <h3 style="color:#2e7d32;">⚡ Fast Analysis</h3>
+    <p>Get disease predictions within seconds.</p>
+</div>
+
+<div style="background:white; padding:20px; margin:10px; border-radius:10px; width:250px; box-shadow:0 8px 20px rgba(0,0,0,0.1);">
+    <h3 style="color:#2e7d32;">🌱 High Accuracy</h3>
+    <p>Powered by trained deep learning models.</p>
+</div>
+
+<div style="background:white; padding:20px; margin:10px; border-radius:10px; width:250px; box-shadow:0 8px 20px rgba(0,0,0,0.1);">
+    <h3 style="color:#2e7d32;">📱 Easy to Use</h3>
+    <p>Capture or upload leaf images effortlessly.</p>
+</div>
+
+
+</div>
+
+{% endblock %}
